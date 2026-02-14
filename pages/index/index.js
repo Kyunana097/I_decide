@@ -173,6 +173,20 @@ Page({
       return `transform: rotate(${rotateAngle}deg); background: #0077ff; clip-path: ${clipPath};`;
     },
 
+    copyGitHub() {
+      const url = 'https://github.com/Kyunana097/I_decide'; // 你的仓库地址
+      wx.setClipboardData({
+        data: url,
+        success: () => {
+          wx.showToast({
+            title: '链接已复制',
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      });
+    },
+
   launchConfetti() {
     const colors = [
       '#ff6b6b', '#feca57', '#48dbfb', '#1dd1a1', 
@@ -265,4 +279,5 @@ Page({
       this.setData({ showConfetti: false, confettiList: [] });
     }, 4500);
   }
+  
 })

@@ -308,3 +308,24 @@
     opacity: 0;
   }
 }
+
+.footer {
+  margin-top: 60rpx;
+  padding: 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  opacity: 0.6;
+}
+
+.footer-text {
+  font-size: 24rpx;
+  color: #666;
+  text-decoration: underline;
+}
+
+.footer-icon {
+  font-size: 20rpx;
+  color: #666;
+}

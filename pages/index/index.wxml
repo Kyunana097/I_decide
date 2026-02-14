@@ -73,5 +73,11 @@
         <button size="mini" bindtap="applyConfig">确定</button>
       </view>
     </view>
+  </view>  
+  
+  <!-- 底部 GitHub 链接 -->
+  <view class="footer" bindtap="copyGitHub">
+    <text class="footer-text">开源代码 Kyunana097 @ GitHub</text>
+    <text class="footer-icon">↗</text>
   </view>
 </view>
