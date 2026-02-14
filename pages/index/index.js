@@ -97,8 +97,23 @@ Page({
 
     // 应用配置
     applyConfig() {
-      let p = Number(this.data.editUserPercent);
-      if (isNaN(p)) p = this.data.sectorPercent;
+      const raw = String(this.data.editUserPercent).trim();
+
+      // 只允许整数：如果包含小数点/非数字，则不更改，直接提示
+      if (!/^\d+$/.test(raw)) {
+        wx.showToast({
+          title: '请输入整数百分比',
+          icon: 'none'
+        });
+        // 还原输入框显示为当前生效的比例
+        this.setData({ editUserPercent: this.data.sectorPercent });
+        return;
+      }
+
+      let p = parseInt(raw, 10);
+      if (isNaN(p)) {
+        p = this.data.sectorPercent;
+      }
       // 限制在 1%~99%，保证两个分区都有面积
       p = Math.max(1, Math.min(99, p));
 
@@ -135,10 +150,18 @@ Page({
       this.launchConfetti();
     },
 
-    // 把文字转成适合在转盘上展示的短标签（>3 个字时加省略号）
+    // 把文字转成适合在转盘上展示的短标签（>3 个“字符”时加省略号，支持 emoji）
     makeLabel(text) {
       const t = (text || '').trim() || '';
-      return t.length > 3 ? t.slice(0, 3) + '…' : t;
+      // 按字符遍历，避免把一个 emoji 截成两半
+      const chars = [];
+      for (const ch of t) {
+        chars.push(ch);
+      }
+      if (chars.length > 3) {
+        return chars.slice(0, 3).join('') + '…';
+      }
+      return t;
     },
 
     // 根据百分比（n%）和当前旋转角度，生成“近似圆弧”的扇形 style 字符串

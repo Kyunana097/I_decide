@@ -94,7 +94,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* 视觉上略偏上一点，看起来更居中 */
+  transform: translate(-35%, -40%);
   width: 40rpx;
   height: 40rpx;
   background: #333;
