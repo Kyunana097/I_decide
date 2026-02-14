@@ -1,0 +1,77 @@
+<view class="container">
+  <!-- 转盘区域 -->
+  <view class="wheel-container">
+    <!-- 底层大圆（转盘背景） -->
+    <view class="wheel">
+      <!-- 转盘上的奖品分区（可选装饰） -->
+        <view class="wheel-section" style="{{sectorStyle}}">
+          <!-- 分区1文字：跟随扇形和指针一起旋转 -->
+          <view class="sector1-label">{{sector1Label}}</view>
+        </view>
+        <!-- 分区2文字：固定在转盘背景上，不随指针移动 -->
+        <view class="sector2-label">{{sector2Label}}</view>
+    </view>
+    
+    <!-- 扇形指针（旋转层） -->
+    <view class="pointer" style="transform: rotate({{rotateAngle}}deg);">
+      <view class="pointer-triangle"></view>
+    </view>
+    
+    <!-- 中心固定圆点 -->
+    <view class="center-dot"></view>
+  </view>
+  
+  <button class="config-btn" bindtap="openConfig">
+    修改
+  </button>
+
+<!-- 按钮 -->
+  <button class="spin-btn" bindtap="startSpin" disabled="{{isSpinning}}">
+    {{isSpinning ? '决策中...' : '决策'}}
+  </button>
+  <!-- 结果显示 -->
+  <view class="result" wx:if="{{result}}">
+     {{result}} 
+  </view>
+
+<!-- 彩纸动画 -->
+<view wx:if="{{showConfetti}}" class="confetti-mask">
+  <view 
+    wx:for="{{confettiList}}" 
+    wx:key="id" 
+    class="confetti-item {{item.class}}" 
+    style="{{item.style}}"
+  ></view>
+</view>
+
+  <!-- 配置二级窗口 -->
+  <view wx:if="{{showConfig}}" class="config-mask">
+    <view class="config-panel">
+      <view class="config-title">修改分区与比例</view>
+
+      <view class="config-row">
+        <text class="config-label">分区1文字</text>
+        <input class="config-input" value="{{editSector1Text}}" bindinput="onEditSector1Text" />
+      </view>
+
+      <view class="config-row">
+        <text class="config-label">分区2文字</text>
+        <input class="config-input" value="{{editSector2Text}}" bindinput="onEditSector2Text" />
+      </view>
+
+      <view class="config-row">
+        <text class="config-label">分区1比例(1~99%)</text>
+        <input class="config-input" type="number" value="{{editUserPercent}}" bindinput="onEditPercent" />
+      </view>
+
+      <view class="config-row config-row-note">
+        <text class="config-label">分区2比例 {{100 - editUserPercent}}%</text>
+      </view>
+
+      <view class="config-actions">
+        <button size="mini" bindtap="closeConfig">取消</button>
+        <button size="mini" bindtap="applyConfig">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

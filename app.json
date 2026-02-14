@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "我决策",
+    "navigationBarBackgroundColor": "#ffffff"
+  }
+}
