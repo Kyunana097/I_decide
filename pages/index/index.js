@@ -5,7 +5,7 @@ Page({
       duration: 4000,      // 动画时长（毫秒）
       result: '',          // 结果
       // 用户配置：分区1占整圈的百分比（n%），分区2为 100-n
-      sectorPercent: 30,
+      sectorPercent: 15,
       userPercent: 50,
       // 两个分区的文字
       sector1Text: '打游戏',
